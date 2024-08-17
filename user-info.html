@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0cFleHkr83XTp-0AALLRqiAOs7nZxme-OVQ&s');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(51, 51, 51, 0.8);
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .navbar .logo {
+            height: 60px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #555;
+        }
+
+        .users-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .user-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 250px;
+            position: relative;
+        }
+
+        .user-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .user-card img:hover {
+            transform: scale(1.1);
+        }
+
+        .user-info {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            width: 200px;
+            text-align: left;
+            z-index: 10;
+        }
+
+        .user-info p {
+            margin: 10px 0;
+        }
+
+        .user-info img {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+        }
+
+        .change-name-btn,
+        .delete-btn,
+        .save-btn,
+        .rate-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .change-name-btn:hover,
+        .delete-btn:hover,
+        .save-btn:hover,
+        .rate-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .save-btn {
+            background-color: #28a745;
+        }
+
+        .save-btn:hover {
+            background-color: #218838;
+        }
+
+        .rate-btn {
+            background-color: #ffc107;
+        }
+
+        .rate-btn:hover {
+            background-color: #e0a800;
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            width: 150px;
+            text-align: left;
+            z-index: 10;
+        }
+
+        .user-dropdown a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .user-dropdown a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .user-link:hover + .user-dropdown {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0cFleHkr83XTp-0AALLRqiAOs7nZxme-OVQ&s" class="logo" alt="Hotel Logo">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+        <div class="user-menu">
+            <a href="#" class="user-link">User Menu &#x25BC;</a>
+            <div class="user-dropdown">
+                <button onclick="location.href='profile.html'">Profile</button>
+                <button onclick="location.href='settings.html'">Settings</button>
+                <button onclick="location.href='orders.html'">Orders</button>
+                <button onclick="location.href='logout.html'">Logout</button>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+
+    <div class="users-container" id="users-container">
+        <!-- User cards will be inserted here -->
+    </div>
+
+    <script>
+        window.onload = function() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const usersContainer = document.getElementById('users-container');
+
+            if (users.length === 0) {
+                usersContainer.innerHTML = '<p>No users found.</p>';
+                return;
+            }
+
+            users.forEach(user => {
+                const userCard = document.createElement('div');
+                userCard.className = 'user-card';
+
+                userCard.innerHTML = `
+                    <img src="${user.profileImage || 'default-profile.jpg'}" alt="${user.username}" onclick="toggleDetails('${user.username}')">
+                    <h3 id="name-${user.username}">${user.username}</h3>
+                    <button class="change-name-btn" onclick="changeName('${user.username}')">Change Name</button>
+                    <button class="save-btn" onclick="saveChanges('${user.username}')">Save Changes</button>
+                    <button class="delete-btn" onclick="deleteUser('${user.username}')">Delete User</button>
+                    <button class="rate-btn" onclick="rateUser('${user.username}')">Rate User</button>
+                    <div class="user-info" id="info-${user.username}">
+                        <p><strong>Address:</strong> <span id="address-${user.username}">${user.address || 'N/A'}</span></p>
+                        <p><strong>Workplace:</strong> <span id="workplace-${user.username}">${user.workplace || 'N/A'}</span></p>
+                        <p><strong>Phone:</strong> <span id="phone-${user.username}">${user.phone || 'N/A'}</span></p>
+                        <p><strong>Profession:</strong> <span id="profession-${user.username}">${user.profession || 'N/A'}</span></p>
+                        <img src="${user.backgroundImage || 'default-background.jpg'}" alt="${user.username} background image">
+                    </div>
+                `;
+
+                usersContainer.appendChild(userCard);
+            });
+        };
+
+        function toggleDetails(username) {
+            const userInfo = document.getElementById(`info-${username}`);
+            userInfo.style.display = userInfo.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function changeName(username) {
+            const newName = prompt('Enter new name:', document.getElementById(`name-${username}`).textContent);
+            if (newName) {
+                document.getElementById(`name-${username}`).textContent = newName;
+            }
+        }
+
+        function saveChanges(username) {
+            const newAddress = prompt('Enter new address:', document.getElementById(`address-${username}`).textContent);
+            if (newAddress) {
+                document.getElementById(`address-${username}`).textContent = newAddress;
+            }
+
+            const newWorkplace = prompt('Enter new workplace:', document.getElementById(`workplace-${username}`).textContent);
+            if (newWorkplace) {
+                document.getElementById(`workplace-${username}`).textContent = newWorkplace;
+            }
+
+            const newPhone = prompt('Enter new phone:', document.getElementById(`phone-${username}`).textContent);
+            if (newPhone) {
+                document.getElementById(`phone-${username}`).textContent = newPhone;
+            }
+
+            const newProfession = prompt('Enter new profession:', document.getElementById(`profession-${username}`).textContent);
+            if (newProfession) {
+                document.getElementById(`profession-${username}`).textContent = newProfession;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const userIndex = users.findIndex(user => user.username === username);
+            if (userIndex !== -1) {
+                users[userIndex] = {
+                    ...users[userIndex],
+                    address: newAddress,
+                    workplace: newWorkplace,
+                    phone: newPhone,
+                    profession: newProfession
+                };
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+        }
+
+        function deleteUser(username) {
+            if (confirm(`Are you sure you want to delete ${username}?`)) {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                users = users.filter(user => user.username !== username);
+                localStorage.setItem('users', JSON.stringify(users));
+                location.reload();
+            }
+        }
+
+        function rateUser(username) {
+            alert(`You rated ${username}!`);
+        }
+    </script>
+</body>
+</html>

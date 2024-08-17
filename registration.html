@@ -1,0 +1,116 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Feruz's Hotel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .registration-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        .registration-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .registration-container input[type="text"],
+        .registration-container input[type="password"],
+        .registration-container input[type="tel"],
+        .registration-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .registration-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .registration-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="registration-container">
+        <h1>Register</h1>
+        <input type="text" id="fullName" placeholder="Full Name" required>
+        <input type="text" id="jobNumber" placeholder="Job Number" required>
+        <select id="jobTitle" required>
+            <option value="" disabled selected>Select Your Job Title</option>
+            <option value="Oshpaz Fast Food">Oshpaz Fast Food</option>
+            <option value="Aftisand">Aftisand</option>
+            <option value="Admin">Admin</option>
+            <option value="Owner">Owner</option>
+            <option value="Afitsandan Dastvka">Afitsandan Dastvka</option>
+        </select>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <input type="file" id="image" accept="image/*" required>
+        <button onclick="register()">Register</button>
+    </div>
+
+    <script>
+        function register() {
+            const fullName = document.getElementById('fullName').value;
+            const jobNumber = document.getElementById('jobNumber').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const phone = document.getElementById('phone').value;
+            const image = document.getElementById('image').files[0];
+
+            if (fullName && jobNumber && jobTitle && username && password && phone && image) {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                users.push({
+                    fullName,
+                    jobNumber,
+                    jobTitle,
+                    username,
+                    password,
+                    phone,
+                    image: image.name
+                });
+                localStorage.setItem('users', JSON.stringify(users));
+                window.location.href = 'login.html';
+            } else {
+                alert('Please fill all the fields correctly.');
+            }
+        }
+    </script>
+
+</body>
+</html>

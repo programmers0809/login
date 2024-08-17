@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Feruz's Fast Food</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            animation: backgroundAnimation 5s infinite alternate;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+        }
+
+        .login-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideIn 1s forwards 0.5s;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"],
+        .login-container input[type="tel"],
+        .login-container select,
+        .login-container input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards 1s;
+        }
+
+        .login-container button,
+        .login-container .register-button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .login-container button {
+            background-color: #007bff;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards 1.5s;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .login-container .register-button {
+            background-color: #28a745;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards 2s;
+        }
+
+        .login-container .register-button:hover {
+            background-color: #218838;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes backgroundAnimation {
+            from {
+                background-color: #f0f0f0;
+            }
+            to {
+                background-color: #e0e0e0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>Login to Feruz's Fast Food</h1>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <select id="address" required>
+            <option value="" disabled selected>Select Your Address</option>
+            <option value="Samarkand">Samarkand</option>
+            <option value="Tashkent">Tashkent</option>
+            <option value="Sirdaryo">Sirdaryo</option>
+            <option value="Qarshi">Qarshi</option>
+            <option value="Tayloq">Tayloq Tumani</option>
+        </select>
+        <select id="workplace" required>
+            <option value="" disabled selected>Select Your Workplace</option>
+            <option value="Fast Food">Fast Food</option>
+            <option value="Mansur Shalik">Mansur Shalik</option>
+            <option value="Evos">Evos</option>
+            <option value="BBQ BUGERGER">BBQ BUGERGER</option>
+            <option value="TUTUS">TUTUS</option>
+        </select>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <select id="profession" required>
+            <option value="" disabled selected>Select Your Profession</option>
+            <option value="oshpaz fast food">Oshpaz Fast Food</option>
+            <option value="aftisand">Aftisand</option>
+            <option value="admin">Admin</option>
+            <option value="owner">Owner</option>
+            <option value="afitsandan dastvka">Afitsandan Dastvka</option>
+        </select>
+        <input type="file" id="image" accept="image/*" required>
+        <button onclick="login()">Login</button>
+        <button class="register-button" onclick="redirectToRegistration()">Register</button>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const address = document.getElementById('address').value;
+            const workplace = document.getElementById('workplace').value;
+            const phone = document.getElementById('phone').value;
+            const profession = document.getElementById('profession').value;
+            const image = document.getElementById('image').files[0];
+
+            if (username && password && address && workplace && phone && profession && image) {
+                // Handle file upload here, e.g., send to server
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                users.push({
+                    username,
+                    address,
+                    workplace,
+                    phone,
+                    profession,
+                    image: image.name // Handle the image file on the server side
+                });
+                localStorage.setItem('users', JSON.stringify(users));
+                window.location.href = 'home.html';
+            } else {
+                alert('Please fill all the fields correctly.');
+            }
+        }
+
+        function redirectToRegistration() {
+            window.location.href = 'registration.html';
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
